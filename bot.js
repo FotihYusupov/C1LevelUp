@@ -172,9 +172,13 @@ bot.on("callback_query", async (query) => {
       const findPlayerRes = await findPlayer(chatId);
       if (result === true) {
         if (findPlayerRes) {
+          const find = await Players.findOne({ chatId: chatId })
+          const ref = `Sizning refelar havolangiz: https://t.me/C1LevelUpbot?start=${find._id}`
+          const str = `🎉Tabriklaymiz siz muvofiqiyatli royxatdan o'tdingiz.\n🔗Ushbu refelar havola orqali ko'proq do'stingizni taklif qiling va katta mukofotlarga ega bo'ling.\n⬇️⬇️⬇️\n${ref}`;
           bot.sendMessage(
             chatId,
-            "🎉Tabriklaymiz siz muvofiqiyatli royxatdan o'tdingiz"
+            str,
+            { parse_mode: "Markdown", ...userOpts }
           );
           return;
         }
