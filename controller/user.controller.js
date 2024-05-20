@@ -12,8 +12,9 @@ exports.getMe = async (req, res) => {
     }
     return res.json({
       data: {
-        token: sign(findUser._id),
-        login: findUser.login,
+        token: sign(findUser._id.toString()),
+        username: findUser.username,
+        password: findUser.password
       },
     });
   } catch (err) {

@@ -1,11 +1,13 @@
 const { Router } = require("express");
-const translationRoutes = require("./translation.routes.js");
+const authMiddleware = require("../middlewares/auth.middleware.js");
 const userRoutes = require("./user.routes.js");
-const blogRoutes = require("./blog.routes.js");
+const channelRoutes = require("./channel.routes.js");
+const playerRoutes = require("./player.routes.js");
+
 const router = Router();
 
-router.use("/translations", translationRoutes);
 router.use("/users", userRoutes);
-router.use("/blogs", blogRoutes);
+router.use("/channels", authMiddleware, channelRoutes);
+router.use("/players", authMiddleware, playerRoutes);
 
 module.exports = router;
